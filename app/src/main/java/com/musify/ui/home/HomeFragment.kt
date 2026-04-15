@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     private fun setupAdapters() {
         val onClick = { track: com.musify.data.model.Track ->
             Intent(requireContext(), PlayerActivity::class.java).apply {
