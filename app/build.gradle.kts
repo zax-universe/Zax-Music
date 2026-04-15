@@ -29,11 +29,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    
     kotlinOptions { 
         jvmTarget = "17"
-        freeCompilerArgs += listOf("-Xopt-in=kotlin.ExperimentalStdlibApi")
+        freeCompilerArgs += listOf("-opt-in=kotlin.ExperimentalStdlibApi")
     }
-    buildFeatures { viewBinding = true }
+    
+    buildFeatures { 
+        viewBinding = true 
+    }
 }
 
 dependencies {
@@ -60,7 +64,7 @@ dependencies {
     implementation(libs.glide)
     ksp(libs.glide.compiler)
     
-    // Ganti ExoPlayer dengan Media3
+    // Media3 (ExoPlayer)
     implementation("androidx.media3:media3-exoplayer:1.3.1")
     implementation("androidx.media3:media3-ui:1.3.1")
     implementation("androidx.media3:media3-session:1.3.1")
