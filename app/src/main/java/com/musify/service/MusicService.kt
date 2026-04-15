@@ -45,7 +45,6 @@ class MusicService : Service() {
         exoPlayer = ExoPlayer.Builder(this).build().apply {
             addListener(object : Player.Listener {
                 override fun onIsPlayingChanged(playing: Boolean) {
-                    // Ganti postValue dengan value
                     isPlaying.value = playing
                     updateNotification()
                 }
