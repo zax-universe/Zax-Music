@@ -35,15 +35,14 @@
 
             <!-- Album Art -->
             <ImageView
-                android:id="@+id/ivMiniArt"
+                android:id="@+id/ivMiniAlbumArt"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:scaleType="centerCrop"
                 android:background="@color/surface"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/ivMiniAlbumArt"/>
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <!-- Track Info -->
             <LinearLayout
