@@ -14,6 +14,7 @@ import com.musify.ui.player.PlayerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 
+@OptIn(ExperimentalStdlibApi::class)
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -46,7 +47,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     private fun setupAdapters() {
         val onClick = { track: com.musify.data.model.Track ->
             Intent(requireContext(), PlayerActivity::class.java).apply {
@@ -97,5 +97,8 @@ class HomeFragment : Fragment() {
         binding.btnRetry.setOnClickListener { viewModel.loadAll() }
     }
 
-    override fun onDestroyView() { super.onDestroyView(); _binding = null }
+    override fun onDestroyView() { 
+        super.onDestroyView()
+        _binding = null 
+    }
 }
