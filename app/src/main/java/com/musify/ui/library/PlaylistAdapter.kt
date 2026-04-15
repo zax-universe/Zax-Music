@@ -23,14 +23,18 @@ class PlaylistAdapter(
     }
 
     inner class ViewHolder(val binding: ItemPlaylistBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(p: PlaylistEntity) {
-            binding.tvPlaylistName.text = p.name
-            val count = if (p.trackIds.isEmpty()) 0 else p.trackIds.split(",").size
-            binding.tvSongsCount.text = "$count songs"
-            Glide.with(binding.root).load(p.coverArtUrl)
-                .placeholder(R.drawable.ic_library_music).into(binding.ivPlaylistArt)
-            binding.root.setOnClickListener { onClick(p) }
-            binding.btnMore.setOnClickListener { onMore(p) }
+        fun bind(playlist: PlaylistEntity) {
+            binding.tvName.text = playlist.name
+            val count = if (playlist.trackIds.isEmpty()) 0 else playlist.trackIds.split(",").size
+            binding.tvCount.text = "$count songs"
+            
+            Glide.with(binding.root)
+                .load(playlist.coverArtUrl)
+                .placeholder(R.drawable.ic_library_music)
+                .into(binding.ivCover)
+            
+            binding.root.setOnClickListener { onClick(playlist) }
+            binding.btnMore.setOnClickListener { onMore(playlist) }
         }
     }
 
