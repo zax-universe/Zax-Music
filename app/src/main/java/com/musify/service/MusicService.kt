@@ -45,7 +45,8 @@ class MusicService : Service() {
         exoPlayer = ExoPlayer.Builder(this).build().apply {
             addListener(object : Player.Listener {
                 override fun onIsPlayingChanged(playing: Boolean) {
-                    isPlaying.postValue(playing)
+                    // Ganti postValue dengan value
+                    isPlaying.value = playing
                     updateNotification()
                 }
                 override fun onPlaybackStateChanged(state: Int) {
@@ -74,7 +75,7 @@ class MusicService : Service() {
     }
 
     fun playTrack(track: Track) {
-        currentTrack.postValue(track)
+        currentTrack.value = track
         track.previewUrl?.let { url ->
             exoPlayer?.setMediaItem(MediaItem.fromUri(url))
             exoPlayer?.prepare()
@@ -105,9 +106,9 @@ class MusicService : Service() {
                 val player = exoPlayer ?: continue
                 val dur = player.duration.coerceAtLeast(1L)
                 val pos = player.currentPosition
-                progress.postValue((pos * 100 / dur).toInt())
-                currentTimeStr.postValue(formatTime(pos))
-                durationStr.postValue(formatTime(dur))
+                progress.value = (pos * 100 / dur).toInt()
+                currentTimeStr.value = formatTime(pos)
+                durationStr.value = formatTime(dur)
             }
         }
     }
