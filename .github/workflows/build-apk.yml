@@ -20,6 +20,22 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Create gradle.properties
+        run: |
+          cat > gradle.properties << EOF
+          android.useAndroidX=true
+          android.enableJetifier=true
+          org.gradle.jvmargs=-Xmx2048m
+          org.gradle.daemon=true
+          EOF
+
+      - name: Create settings.gradle
+        run: |
+          cat > settings.gradle << EOF
+          rootProject.name = "Zax-Music"
+          include ':app'
+          EOF
+
       - name: Decode Keystore
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > $GITHUB_WORKSPACE/release.keystore
@@ -28,6 +44,8 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew assembleRelease \
+            -Pandroid.useAndroidX=true \
+            -Pandroid.enableJetifier=true \
             -Pandroid.injected.signing.store.file=$GITHUB_WORKSPACE/release.keystore \
             -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
             -Pandroid.injected.signing.key.alias=${{ secrets.KEY_ALIAS }} \
